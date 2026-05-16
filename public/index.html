@@ -5,68 +5,179 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terminal Side-car</title>
     <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: rgba(45, 45, 45, 0.7);
+            --accent-color: #569cd6;
+            --text-color: #d4d4d4;
+            --secondary-text: #9cdcfe;
+            --cmd-color: #ce9178;
+            --hover-bg: rgba(61, 61, 61, 0.8);
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e1e;
-            color: #d4d4d4;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at top right, #1e1e1e, #121212);
+            color: var(--text-color);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             height: 100vh;
             box-sizing: border-box;
+            overflow: hidden;
         }
-        h2 { margin-top: 0; color: #569cd6; font-size: 1.2rem; }
-        .controls { margin-bottom: 20px; }
+
+        h2 { 
+            margin: 0 0 15px 0; 
+            color: var(--accent-color); 
+            font-size: 1rem; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .action-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .action-btn {
+            flex: 1;
+            background: var(--card-bg);
+            border: 1px solid #333;
+            color: var(--text-color);
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .action-btn:hover {
+            background: var(--hover-bg);
+            border-color: var(--accent-color);
+            transform: translateY(-1px);
+        }
+
+        .controls { 
+            background: var(--card-bg);
+            padding: 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid #333;
+            margin-bottom: 15px;
+        }
+
         select, input {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
-            background-color: #333;
+            margin-bottom: 8px;
+            background-color: rgba(30, 30, 30, 0.5);
             border: 1px solid #444;
             color: #fff;
-            border-radius: 4px;
+            border-radius: 6px;
             box-sizing: border-box;
+            font-size: 0.9rem;
+            outline: none;
         }
+
+        select:focus, input:focus {
+            border-color: var(--accent-color);
+        }
+
+        input { margin-bottom: 0; }
+
         .command-list {
             flex-grow: 1;
             overflow-y: auto;
-            border-top: 1px solid #333;
-            padding-top: 10px;
+            padding-right: 5px;
         }
+
+        .command-list::-webkit-scrollbar {
+            width: 6px;
+        }
+        .command-list::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+
         .command-item {
-            background-color: #2d2d2d;
-            border: 1px solid #444;
+            background: var(--card-bg);
+            backdrop-filter: blur(5px);
+            border: 1px solid #333;
             padding: 12px;
             margin-bottom: 10px;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideIn 0.3s ease forwards;
+            opacity: 0;
         }
-        .command-item:hover { background-color: #3d3d3d; border-color: #569cd6; }
-        .cmd-text { font-family: 'Courier New', Courier, monospace; color: #ce9178; font-weight: bold; display: block; margin-bottom: 5px; }
-        .cmd-desc { font-size: 0.9rem; color: #9cdcfe; }
+
+        @keyframes slideIn {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .command-item:hover { 
+            background: var(--hover-bg); 
+            border-color: var(--accent-color);
+            transform: scale(1.02);
+        }
+
+        .cmd-text { 
+            font-family: 'JetBrains Mono', 'Fira Code', monospace; 
+            color: var(--cmd-color); 
+            font-weight: bold; 
+            display: block; 
+            margin-bottom: 5px; 
+            font-size: 0.95rem;
+        }
+        
+        .cmd-desc { font-size: 0.85rem; color: var(--secondary-text); line-height: 1.4; }
+
         .copy-status { 
-            position: fixed; bottom: 20px; right: 20px; 
-            background: #4caf50; color: white; padding: 10px 20px; 
-            border-radius: 4px; display: none; 
+            position: fixed; bottom: 20px; left: 50%; 
+            transform: translateX(-50%);
+            background: var(--accent-color); color: white; padding: 10px 20px; 
+            border-radius: 20px; display: none; 
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 100;
         }
     </style>
 </head>
 <body>
-    <h2>Terminal Context</h2>
+    <h2>
+        <span>Terminal Side-car</span>
+        <span id="status-dot" style="width: 8px; height: 8px; background: #4caf50; border-radius: 50%;"></span>
+    </h2>
+
+    <div class="action-bar">
+        <button class="action-btn" onclick="copyToClipboard('clear')">🗑️ Clear</button>
+        <button class="action-btn" onclick="copyToClipboard('exit')">🚪 Exit</button>
+        <button class="action-btn" onclick="window.location.reload()">🔄 Refresh</button>
+    </div>
+
     <div class="controls">
         <select id="session-select">
-            <option value="">Scanning sessions...</option>
+            <option value="">Scanning...</option>
         </select>
         <input type="text" id="search-input" placeholder="Search commands...">
     </div>
     
-    <div class="command-list" id="command-list">
-        <!-- Commands will appear here -->
-    </div>
+    <div class="command-list" id="command-list"></div>
 
-    <div id="copy-status" class="copy-status">Copied to clipboard!</div>
+    <div id="copy-status" class="copy-status">Copied!</div>
 
     <script>
         const sessionSelect = document.getElementById('session-select');
@@ -82,10 +193,15 @@
                 const sessions = await res.json();
                 
                 const currentVal = sessionSelect.value;
+                const previousSessions = Array.from(sessionSelect.options).map(o => o.text).join(',');
+                const newSessions = sessions.map(s => `${s.pts}: ${s.process}`).join(',');
+
+                if (previousSessions === newSessions) return;
+
                 sessionSelect.innerHTML = '';
                 
                 if (sessions.length === 0) {
-                    sessionSelect.innerHTML = '<option value="">No active terminals</option>';
+                    sessionSelect.innerHTML = '<option value="">No terminals found</option>';
                     return;
                 }
 
@@ -97,8 +213,18 @@
                     sessionSelect.appendChild(opt);
                 });
 
-                if (!currentVal && sessions.length > 0) {
-                    loadCommands(sessions[0].process);
+                // SMART AUTO-FOCUS: 
+                // If we don't have a selection, or our selection was 'bash', 
+                // and there's a better process available, switch to it.
+                if (!currentVal || currentVal === 'bash') {
+                    const interestingSession = sessions.find(s => s.process !== 'bash');
+                    if (interestingSession) {
+                        sessionSelect.value = interestingSession.process;
+                        loadCommands(interestingSession.process);
+                    } else if (!currentVal && sessions.length > 0) {
+                        // Fallback to first session (usually bash)
+                        loadCommands(sessions[0].process);
+                    }
                 }
             } catch (e) { console.error(e); }
         }
@@ -120,9 +246,10 @@
                 c.description.toLowerCase().includes(query)
             );
 
-            filtered.forEach(c => {
+            filtered.forEach((c, index) => {
                 const div = document.createElement('div');
                 div.className = 'command-item';
+                div.style.animationDelay = `${index * 0.05}s`;
                 div.innerHTML = `<span class="cmd-text">${c.command}</span><span class="cmd-desc">${c.description}</span>`;
                 div.onclick = () => copyToClipboard(c.command);
                 commandList.appendChild(div);
@@ -132,7 +259,7 @@
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 copyStatus.style.display = 'block';
-                setTimeout(() => copyStatus.style.display = 'none', 2000);
+                setTimeout(() => copyStatus.style.display = 'none', 1500);
             });
         }
 
