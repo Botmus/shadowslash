@@ -11,6 +11,7 @@ A lightweight, context-aware command assistant that lives next to your terminal.
 - **Shadow Detection:** Identifies specific tools even when they are nested inside node/python processes.
 - **Dynamic Session Switching:** Pick between multiple open terminals via a glassmorphism dropdown.
 - **Fuzzy Search:** Quickly find the exact command you need.
+- **Most Wanted:** Automatically tracks your usage and moves your favorite commands to the top.
 - **App Mode:** Launches in a sleek, standalone window.
 - **Extensible:** Add custom command sets by simply dropping a JSON file in `commands/`.
 
@@ -57,8 +58,7 @@ ShadowSlash is just getting started. Here is the planned order of features:
 
 1.  **Auto-Inject:** Automatically send clicked commands directly into the active terminal session (no more manual paste).
 2.  **Global Hotkey:** Summon or hide ShadowSlash from anywhere with a custom keyboard shortcut (e.g., `Ctrl+Space`).
-3.  **Most Wanted:** Smart sorting that moves your most frequently used commands to the top of the list.
-4.  **Themes & Customization:** Personalize the look with different color schemes, transparency levels, and glassmorphism styles.
+3.  **Themes & Customization:** Personalize the look with different color schemes, transparency levels, and glassmorphism styles.
 
 ## 📜 License
 MIT

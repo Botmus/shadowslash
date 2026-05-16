@@ -237,6 +237,21 @@
             } catch (e) { console.error(e); }
         }
 
+        function getUsageKey(cmd) {
+            return `usage_${sessionSelect.value}_${cmd}`;
+        }
+
+        function getUsageCount(cmd) {
+            return parseInt(localStorage.getItem(getUsageKey(cmd)) || '0');
+        }
+
+        function incrementUsage(cmd) {
+            const current = getUsageCount(cmd);
+            localStorage.setItem(getUsageKey(cmd), (current + 1).toString());
+            // Re-render to show updated sorting
+            renderCommands();
+        }
+
         function renderCommands() {
             const query = searchInput.value.toLowerCase();
             commandList.innerHTML = '';
@@ -252,17 +267,33 @@
                 return;
             }
 
-            const filtered = currentCommands.filter(c => 
+            // Sort by usage (Most Wanted)
+            const sorted = [...currentCommands].sort((a, b) => {
+                const countA = getUsageCount(a.command);
+                const countB = getUsageCount(b.command);
+                if (countB !== countA) return countB - countA;
+                return a.command.localeCompare(b.command);
+            });
+
+            const filtered = sorted.filter(c => 
                 c.command.toLowerCase().includes(query) || 
                 c.description.toLowerCase().includes(query)
             );
 
             filtered.forEach((c, index) => {
+                const count = getUsageCount(c.command);
                 const div = document.createElement('div');
                 div.className = 'command-item';
                 div.style.animationDelay = `${index * 0.05}s`;
-                div.innerHTML = `<span class="cmd-text">${c.command}</span><span class="cmd-desc">${c.description}</span>`;
-                div.onclick = () => copyToClipboard(c.command);
+                div.innerHTML = `
+                    <span class="cmd-text">${c.command}</span>
+                    <span class="cmd-desc">${c.description}</span>
+                    ${count > 0 ? `<span style="font-size: 0.7rem; color: #555; display: block; margin-top: 5px;">Used ${count} times</span>` : ''}
+                `;
+                div.onclick = () => {
+                    incrementUsage(c.command);
+                    copyToClipboard(c.command);
+                };
                 commandList.appendChild(div);
             });
         }
