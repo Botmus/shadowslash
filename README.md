@@ -1,4 +1,4 @@
-# Terminal Side-car 🚀
+# ShadowSlash 🚀
 
 A lightweight, context-aware command assistant that lives next to your terminal. It dynamically detects active terminal sessions and provides a searchable "slash command" cheat sheet for whatever app you are currently running.
 
@@ -8,10 +8,11 @@ A lightweight, context-aware command assistant that lives next to your terminal.
 ## ✨ Features
 
 - **Context-Aware:** Automatically detects if you are in a standard shell, Gemini CLI, Hermes, etc.
-- **Dynamic Session Switching:** Pick between multiple open terminals via a dropdown.
-- **Fuzzy Search:** Quickly find the command you need.
-- **App Mode:** Launches in a sleek, standalone window (powered by Chrome/Chromium).
-- **Extensible:** Easily add custom command sets via JSON files.
+- **Shadow Detection:** Identifies specific tools even when they are nested inside node/python processes.
+- **Dynamic Session Switching:** Pick between multiple open terminals via a glassmorphism dropdown.
+- **Fuzzy Search:** Quickly find the exact command you need.
+- **App Mode:** Launches in a sleek, standalone window.
+- **Extensible:** Add custom command sets by simply dropping a JSON file in `commands/`.
 
 ## 🚀 Getting Started
 
@@ -22,19 +23,19 @@ A lightweight, context-aware command assistant that lives next to your terminal.
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/terminal-sidecar.git
-   cd terminal-sidecar
+   git clone https://github.com/your-username/shadowslash.git
+   cd shadowslash
    ```
-2. Run the installation script to set up the `sidecar` command:
+2. Run the installation script to set up the `shadowslash` command:
    ```bash
    ./install.sh
    ```
-3. Restart your terminal or run `source ~/.bashrc` (or `~/.zshrc`).
+3. Restart your terminal or run `source ~/.zshrc` (or `.bashrc`).
 
 ### Usage
 Simply type the following command in any terminal:
 ```bash
-sidecar
+shadowslash
 ```
 
 ## 🛠 Adding Custom Commands

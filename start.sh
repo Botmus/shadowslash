@@ -35,7 +35,7 @@ until curl -s http://localhost:3000 > /dev/null; do
   sleep 0.5
 done
 
-echo "Launching Terminal Side-car on $OS..."
+echo "Launching ShadowSlash on $OS..."
 # Launch Chrome in App Mode
 "$CHROME_BIN" $CHROME_FLAGS
 
