@@ -1,0 +1,12 @@
+[
+  { "command": "ls -lah", "description": "List files in long format with human-readable sizes, including hidden files." },
+  { "command": "cd ..", "description": "Move up one directory level." },
+  { "command": "grep -r \"pattern\" .", "description": "Search for a pattern recursively in the current directory." },
+  { "command": "find . -name \"*.log\"", "description": "Find all files ending in .log in the current directory." },
+  { "command": "ps aux", "description": "Show all running processes." },
+  { "command": "top", "description": "Display real-time system resources and processes." },
+  { "command": "df -h", "description": "Show disk space usage in human-readable format." },
+  { "command": "free -m", "description": "Show memory usage in MB." },
+  { "command": "chmod +x script.sh", "description": "Make a script executable." },
+  { "command": "tar -czvf archive.tar.gz folder/", "description": "Compress a folder into a .tar.gz archive." }
+]

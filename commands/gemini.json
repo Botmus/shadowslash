@@ -1,0 +1,10 @@
+[
+  { "command": "/help", "description": "Show all available commands and their usage." },
+  { "command": "/plan", "description": "Enter Plan Mode to research and design before making changes." },
+  { "command": "/clear", "description": "Clear the terminal screen and visual session history." },
+  { "command": "/memory", "description": "View or edit the project's MEMORY.md or GEMINI.md files." },
+  { "command": "/model", "description": "Switch between different AI models (e.g., Sonnet, Opus)." },
+  { "command": "/stats", "description": "Show token usage and session statistics." },
+  { "command": "/rewind", "description": "Revert the session to a previous state or checkpoint." },
+  { "command": "/quit", "description": "Exit the Gemini CLI session." }
+]

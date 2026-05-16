@@ -1,0 +1,7 @@
+[
+  { "command": "/chat", "description": "Start a new chat session." },
+  { "command": "/help", "description": "Show help and available commands." },
+  { "command": "/tools", "description": "List available tools and capabilities." },
+  { "command": "/memory", "description": "View or manage agent memories." },
+  { "command": "/quit", "description": "Exit the Hermes session." }
+]
