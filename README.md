@@ -25,15 +25,16 @@ A lightweight, context-aware command assistant that lives next to your terminal.
    git clone https://github.com/your-username/terminal-sidecar.git
    cd terminal-sidecar
    ```
-2. Install dependencies:
+2. Run the installation script to set up the `sidecar` command:
    ```bash
-   npm install
+   ./install.sh
    ```
+3. Restart your terminal or run `source ~/.bashrc` (or `~/.zshrc`).
 
 ### Usage
-Run the launch script:
+Simply type the following command in any terminal:
 ```bash
-./start.sh
+sidecar
 ```
 
 ## 🛠 Adding Custom Commands
