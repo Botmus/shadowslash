@@ -41,4 +41,4 @@ echo "Launching ShadowSlash on $OS..."
 
 # Kill server when chrome is closed
 kill $SERVER_PID 2>/dev/null
-echo "Side-car closed."
+echo "ShadowSlash closed."
