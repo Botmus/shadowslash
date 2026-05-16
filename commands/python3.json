@@ -1,0 +1,10 @@
+[
+  { "command": "python3 script.py", "description": "Execute a Python script using Python 3." },
+  { "command": "python3 -m venv venv", "description": "Create a new virtual environment." },
+  { "command": "source venv/bin/activate", "description": "Activate the virtual environment (Linux/macOS)." },
+  { "command": "pip install package", "description": "Install a Python package from PyPI." },
+  { "command": "pip list", "description": "List all installed Python packages." },
+  { "command": "pip freeze > requirements.txt", "description": "Save all installed packages to a requirements file." },
+  { "command": "pip install -r requirements.txt", "description": "Install all packages listed in a requirements file." },
+  { "command": "python3 --version", "description": "Check the installed Python version." }
+]

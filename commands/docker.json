@@ -1,0 +1,12 @@
+[
+  { "command": "docker ps", "description": "List running containers." },
+  { "command": "docker images", "description": "List all locally stored images." },
+  { "command": "docker build -t name .", "description": "Build an image from a Dockerfile in the current directory." },
+  { "command": "docker run -it name", "description": "Run a container interactively." },
+  { "command": "docker stop container_id", "description": "Stop one or more running containers." },
+  { "command": "docker rm container_id", "description": "Remove one or more containers." },
+  { "command": "docker rmi image_id", "description": "Remove one or more images." },
+  { "command": "docker logs -f container_id", "description": "Fetch the logs of a container in real-time." },
+  { "command": "docker exec -it container_id bash", "description": "Execute a bash shell inside a running container." },
+  { "command": "docker-compose up -d", "description": "Build, (re)create, start, and attach to containers in detached mode." }
+]

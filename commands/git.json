@@ -1,0 +1,13 @@
+[
+  { "command": "git status", "description": "Show the working tree status." },
+  { "command": "git add .", "description": "Stage all current changes for the next commit." },
+  { "command": "git commit -m \"message\"", "description": "Record changes to the repository with a descriptive message." },
+  { "command": "git push origin main", "description": "Upload local repository content to a remote repository." },
+  { "command": "git pull", "description": "Fetch from and integrate with another repository or a local branch." },
+  { "command": "git checkout -b branch-name", "description": "Create a new branch and switch to it." },
+  { "command": "git merge branch-name", "description": "Join two or more development histories together." },
+  { "command": "git log --oneline", "description": "Show commit logs in a compact, one-line format." },
+  { "command": "git diff", "description": "Show changes between commits, commit and working tree, etc." },
+  { "command": "git stash", "description": "Stash the changes in a dirty working directory away." },
+  { "command": "git remote -v", "description": "List all currently configured remote repositories." }
+]
