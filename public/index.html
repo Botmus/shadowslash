@@ -241,6 +241,17 @@
             const query = searchInput.value.toLowerCase();
             commandList.innerHTML = '';
             
+            if (currentCommands.length === 0) {
+                commandList.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: #666;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📄</div>
+                        <p>No command file found for <strong>${sessionSelect.value}</strong>.</p>
+                        <p style="font-size: 0.8rem;">Create <code>commands/${sessionSelect.value}.json</code> to add suggestions.</p>
+                    </div>
+                `;
+                return;
+            }
+
             const filtered = currentCommands.filter(c => 
                 c.command.toLowerCase().includes(query) || 
                 c.description.toLowerCase().includes(query)

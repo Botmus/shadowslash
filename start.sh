@@ -19,6 +19,12 @@ fi
 
 cd "$PROJECT_DIR"
 
+# Ensure dependencies are installed
+if [ ! -d "node_modules" ]; then
+  echo "Installing dependencies..."
+  npm install --silent
+fi
+
 # Start Node.js server in the background
 node server.js &
 SERVER_PID=$!
