@@ -59,7 +59,8 @@ ShadowSlash is just getting started. Here is the planned order of features:
 1.  **Auto-Inject:** Automatically send clicked commands directly into the active terminal session (no more manual paste).
 2.  **Global Hotkey:** Summon or hide ShadowSlash from anywhere with a custom keyboard shortcut (e.g., `Ctrl+Space`).
 3.  **Deep Explanation:** Real-time breakdown of command flags (e.g., explaining what `-rf` actually means) to help you learn as you go.
-4.  **Themes & Customization:** Personalize the look with different color schemes, transparency levels, and glassmorphism styles.
+4.  **Dynamic Discovery:** Automatically scan active tools in the background to find new commands and update your cheat sheets.
+5.  **Themes & Customization:** Personalize the look with different color schemes, transparency levels, and glassmorphism styles.
 
 ## 📜 License
 MIT
